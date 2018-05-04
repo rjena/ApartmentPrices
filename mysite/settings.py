@@ -25,7 +25,7 @@ SECRET_KEY = '%-j*-bju_hr9wkh&@q3(6$tg9ok%fqk^c%4*bo-b!_fbeu=2p&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'rjena.pythonanywhere.com']
 
 
 # Application definition
