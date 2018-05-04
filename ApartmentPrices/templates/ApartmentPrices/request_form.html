@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <title>Цены на квартиры</title>
+    </head>
+    <body>
+        <h1>Запрос</h1>
+        <form>
+        <table border=0>
+        	<tr>
+        		<td width="170">Количество комнат:</td>
+        		<td width="170">Район:</td>
+        		<td width="170">Материал дома:</td>
+        		<td width="190">Квартира</td>
+        		<td width="130">Этаж:</td>
+        		<td width="170"><label for="u-area">Площадь квартиры:</label></td>
+        		<td width="130" height="160" rowspan="2" align="center" valign="bottom">
+        			<input id="send-data" type="submit" value="Узнать" style="height:40px; width:100px">
+        		</td>
+        	</tr>
+        	<tr>
+        		<td valign="top">
+        			<label>
+        				<input type="radio" name="room_no" value=1 checked> 1
+            		</label><br>
+            		<label>
+                		<input type="radio" name="room_no" value=2> 2
+            		</label><br>
+            		<label>
+                		<input type="radio" name="room_no" value=3> 3
+            		</label><br>
+            		<label>
+                		<input type="radio" name="room_no" value=4> 4
+            		</label><br>
+            		<label>
+                		<input type="radio" name="room_no" value=5> 5 и более
+            		</label>
+        		</td>
+        		<td valign="top">
+        			<label>
+        				<input type="radio" name="district" value=1 checked> Ленинский
+            		</label><br>
+            		<label>
+                		<input type="radio" name="district" value=2> Октябрьский
+            		</label><br>
+            		<label>
+                		<input type="radio" name="district" value=3> Правобережный
+            		</label><br>
+            		<label>
+                		<input type="radio" name="district" value=4> Свердловский
+            		</label>
+        		</td>
+        		<td valign="top">
+        			<label>
+        				<input type="radio" name="material" value=1 checked> кирпич
+            		</label><br>
+            		<label>
+                		<input type="radio" name="material" value=2> монолит-кирпич
+            		</label><br>
+            		<label>
+                		<input type="radio" name="material" value=3> панель
+            		</label><br>
+            		<label>
+                		<input type="radio" name="material" value=4> дерево
+            		</label><br>
+            		<label>
+                		<input type="radio" name="material" value=5> другой
+            		</label>
+        		</td>
+        		<td valign="top">
+        			<label>
+        				<input type="radio" name="floor" value="first"> на первом этаже
+            		</label><br>
+            		<label>
+                		<input type="radio" name="floor" value="last"> на последнем этаже
+            		</label><br>
+            		<label>
+                		<input type="radio" name="floor" value="middle" checked> на среднем этаже
+            		</label>
+        		</td>
+        		<td valign="top">
+        			<label>
+        				<input type="radio" name="floor_no" value=1 checked> 1 - 4
+            		</label><br>
+            		<label>
+                		<input type="radio" name="floor_no" value=2> 5 - 8
+            		</label><br>
+            		<label>
+                		<input type="radio" name="floor_no" value=3> 9 - 12
+            		</label><br>
+            		<label>
+                		<input type="radio" name="floor_no" value=4> 13 и выше
+            		</label>
+        		</td>
+        		<td valign="top">
+        			<input id="u-area" type="text" name="area" value=40 size="10">
+        			<label for="u-area">кв.м.</label>
+        			<br><br>
+        			<input id="has-balcony" type="checkbox" name="balcony" checked>
+        			<label for="has-balcony">Нужен балкон</label>
+        		</td>
+        	</tr>
+        </table>
+		</form>
+    </body>
+</html>

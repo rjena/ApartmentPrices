@@ -1,0 +1,24 @@
+<head>
+    <title>{{ apartment }}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Helvetica&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+</head>
+<div>
+    <h1><a href="/">Запросы</a></h1>
+</div>
+<ul>
+<h1>{{ apartment }}</h1>
+    <ul>
+        <li>Количество комнат: {{ apartment.room_no }}</li>
+        <li>Район: {{ apartment.h_dstr }}</li>
+        <li>Материал дома: {{ apartment.h_mtrl }}</li>
+        <li>Этаж: {{ apartment.ap_floor }}</li>
+        {% if apartment.first_floor %}<li>На 1-м этаже</li>{% endif %}
+        {% if apartment.last_floor %}<li>На последнем этаже</li>{% endif %}
+        <li>Всего этажей: {{ apartment.total_floors }}</li>
+        <li>Площадь квартиры: {{ apartment.area }}</li>
+        {% if apartment.balcony %}<li>Есть балкон</li>{% endif %}
+        <li>Стоимость {{ apartment.price }}</li>
+    </ul>
+</ul>

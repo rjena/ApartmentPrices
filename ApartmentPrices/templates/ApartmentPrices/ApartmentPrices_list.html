@@ -1,0 +1,35 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Запросы</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href='//fonts.googleapis.com/css?family=Helvetica&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div>
+            <h1>
+                <a href="/">Запросы</a>
+                <a href="{% url 'ApartmentPrices:apartment_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            </h1>
+        </div>
+
+        {% if apartments %}
+            <ul>
+                {% for apartment in apartments %}
+                    <div>
+                        <h1><a href="{% url 'ApartmentPrices:detail' apartment.id %}">{{ apartment }}</a></h1>
+                        Район: {{ apartment.h_dstr }};
+                        Количество комнат: {{ apartment.room_no }}
+                        <br>
+                        Стоимость: {{ apartment.price }}
+                        <br>
+                    </div>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No requests are available.</p>
+        {% endif %}
+        
+    </body>
+</html>
