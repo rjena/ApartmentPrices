@@ -9,11 +9,7 @@ import numpy as np
 		1-4;5-8;9-12;1й эт.;посл. эт.;
 		комн.;балкон;цена
 '''
-r = np.genfromtxt('data15vars.csv', delimiter=';', skip_header=1,
-                  dtype=(int, int, int,
-                         int, int, int, int,
-                         int, int, int, int, int,
-                         int, int, float))
+r = np.genfromtxt('/home/rjena/ApartmentPrices/ApartmentPrices/data15vars.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, int, int, int, float))
 
 dataLen = len(r)    # количество квартир
 varLen = len(r[0])  # количество переменных
@@ -69,7 +65,7 @@ def summul(i,j):
         a = np.array(x[i])
         b = np.array(x[j])
         return np.sum(a * b)
-    
+
 getMatrixes()
 invMatrA = np.linalg.inv(matrA)
 coefs = np.dot(invMatrA,matrB)
@@ -87,7 +83,7 @@ def apartment_new(request):
     	form = ApartmentForm(request.POST)
     	if form.is_valid():
             apartment = form.save(commit=False)
-            priceCalc = coefs[0] + (apartment.room_no_id + 1) * coefs[13]
+            priceCalc = coefs[0] + apartment.room_no_id * coefs[13]
 
             if apartment.balcony:
                 priceCalc += coefs[14]
@@ -96,17 +92,17 @@ def apartment_new(request):
             if apartment.last_floor:
                 priceCalc += coefs[12]
 
-            if apartment.h_dstr_id<3:
-                priceCalc += coefs[apartment.h_dstr_id+1]
+            if apartment.h_dstr_id<4:
+                priceCalc += coefs[apartment.h_dstr_id]
 
-            if apartment.h_mtrl_id<4:
-                priceCalc += coefs[apartment.h_mtrl_id+4]
+            if apartment.h_mtrl_id<5:
+                priceCalc += coefs[apartment.h_mtrl_id+3]
 
-            if apartment.ap_floor_id<3:
-                priceCalc += coefs[apartment.ap_floor_id+8]
+            if apartment.ap_floor_id<4:
+                priceCalc += coefs[apartment.ap_floor_id+7]
 
             apartment.price = priceCalc
-            
+
             apartment.save()
             return redirect('/')
     else:
