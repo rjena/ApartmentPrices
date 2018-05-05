@@ -9,7 +9,7 @@ import numpy as np
 		1-4;5-8;9-12;1й эт.;посл. эт.;
 		комн.;балкон;цена
 '''
-r = np.genfromtxt('/home/rjena/ApartmentPrices/ApartmentPrices/data15vars.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, int, int, int, float))
+r = np.genfromtxt('/home/rjena/ApartmentPrices/data15vars.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, int, int, int, float))
 
 dataLen = len(r)    # количество квартир
 varLen = len(r[0])  # количество переменных
