@@ -4,13 +4,13 @@ from .models import Apartment, Room, Floor, Material, District
 class ApartmentAdmin(admin.ModelAdmin):
     fieldsets = [
     	('Информация о доме', {
-    		'fields': ('h_dstr', 'h_mtrl', 'total_floors')
+    		'fields': ('h_dstr', 'h_mtrl')
     	}),
     	('Информация о квартире', {
-    		'fields': (('ap_floor', 'first_floor', 'last_floor'), ('area', 'room_no', 'balcony'), 'price')
+    		'fields': (('ap_floor', 'first_floor', 'last_floor'), ('room_no', 'balcony'), 'price')
     	}),
     ]
-    list_display = ('id', 'h_dstr', 'h_mtrl', 'total_floors', 'ap_floor', 'first_floor', 'last_floor', 'area', 'room_no', 'balcony', 'price')
+    list_display = ('id', 'h_dstr', 'h_mtrl', 'ap_floor', 'first_floor', 'last_floor', 'room_no', 'balcony', 'price')
     list_filter = ['h_dstr', 'room_no', 'price']
 
 admin.site.register(Apartment, ApartmentAdmin)
