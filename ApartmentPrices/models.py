@@ -15,7 +15,10 @@ class Floor(models.Model):
     from_no = models.IntegerField(default=0)
     to_no = models.IntegerField(default=3)
     def __str__(self):
-        return str(self.from_no)+" - "+str(self.to_no)
+        if self.to_no < 33:
+            return str(self.from_no)+" - "+str(self.to_no)
+        else:
+            return str(self.from_no)+" и выше"            
     class Meta:
         verbose_name = u'Этаж'
         verbose_name_plural = u'Этаж'
