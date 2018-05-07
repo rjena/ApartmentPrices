@@ -1,15 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Apartment, Room
+from .models import Apartment
 from .forms import ApartmentForm
 import numpy as np
 
 # считывание данных
 '''		Лен. р-н;Окт. р-н;Прав. р-н;
 		кирп.;м/к;пан.;дер.;
-		1-4;5-8;9-12;1й эт.;посл. эт.;
+		этажность;1й эт.;посл. эт.;
 		комн.;балкон;цена
 '''
-r = np.genfromtxt('/home/rjena/ApartmentPrices/data15vars.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, int, int, int, float))
+r = np.genfromtxt('/home/rjena/ApartmentPrices/data15vars.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, int, float))
 
 dataLen = len(r)    # количество квартир
 varLen = len(r[0])  # количество переменных
@@ -27,9 +27,7 @@ x9 = []
 x10 = []
 x11 = []
 x12 = []
-x13 = []
-x14 = []
-x = [x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14]
+x = [x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12]
 for i in range(0,dataLen):
     y.append(r[i][varLen-1])
     for j in range(0,varLen-1):
@@ -83,23 +81,20 @@ def apartment_new(request):
     	form = ApartmentForm(request.POST)
     	if form.is_valid():
             apartment = form.save(commit=False)
-            priceCalc = coefs[0] + apartment.room_no_id * coefs[13]
+            priceCalc = coefs[0] + apartment.room_no * coefs[11] + apartment.total_floors * coefs[8]
 
             if apartment.balcony:
-                priceCalc += coefs[14]
-            if apartment.first_floor:
-                priceCalc += coefs[11]
-            if apartment.last_floor:
                 priceCalc += coefs[12]
+            if apartment.first_floor:
+                priceCalc += coefs[9]
+            if apartment.last_floor:
+                priceCalc += coefs[10]
 
             if apartment.h_dstr_id<4:
                 priceCalc += coefs[apartment.h_dstr_id]
 
             if apartment.h_mtrl_id<5:
                 priceCalc += coefs[apartment.h_mtrl_id+3]
-
-            if apartment.ap_floor_id<4:
-                priceCalc += coefs[apartment.ap_floor_id+7]
 
             apartment.price = priceCalc
 

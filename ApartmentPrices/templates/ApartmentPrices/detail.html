@@ -13,7 +13,7 @@
         <li>Количество комнат: {{ apartment.room_no }}</li>
         <li>Район: {{ apartment.h_dstr }}</li>
         <li>Материал дома: {{ apartment.h_mtrl }}</li>
-        <li>Этаж: {{ apartment.ap_floor }}</li>
+        <li>Этажность: {{ apartment.total_floors }}</li>
         {% if apartment.first_floor %}<li>На 1-м этаже</li>{% endif %}
         {% if apartment.last_floor %}<li>На последнем этаже</li>{% endif %}
         {% if apartment.balcony %}<li>Есть балкон</li>{% endif %}

@@ -1,28 +1,14 @@
 from django.db import models
+from django.core.validators import MaxValueValidator
+from django.core.exceptions import ValidationError
 
-class Room(models.Model):
-    quantity = models.IntegerField(default=0)
-    def __str__(self):
-    	if self.quantity<5:
-    		return str(self.quantity)
-    	else:
-    		return str(self.quantity)+" и более"
-    class Meta:
-        verbose_name = u'Количество комнат'
-        verbose_name_plural = u'Количество комнат'
-
-class Floor(models.Model):
-    from_no = models.IntegerField(default=0)
-    to_no = models.IntegerField(default=3)
-    def __str__(self):
-        if self.to_no < 33:
-            return str(self.from_no)+" - "+str(self.to_no)
-        else:
-            return str(self.from_no)+" и выше"            
-    class Meta:
-        verbose_name = u'Этаж'
-        verbose_name_plural = u'Этаж'
-
+def validate_nonzero(value):
+    if value == 0:
+        raise ValidationError(
+            ('Это значение не может быть равно 0'),
+            params={'value': value},
+        )
+    
 class Material(models.Model):
     name_mtrl = models.CharField(max_length=20)
     def __str__(self):
@@ -40,11 +26,11 @@ class District(models.Model):
         verbose_name_plural = u'Район'
 
 class Apartment(models.Model):
-    room_no = models.ForeignKey(Room, on_delete=models.CASCADE, verbose_name=u"Количество комнат")
+    room_no = models.PositiveIntegerField(default=2, validators=[MaxValueValidator(20), validate_nonzero], verbose_name=u"Количество комнат")
     first_floor = models.BooleanField(verbose_name=u"На 1-м этаже?")
     last_floor = models.BooleanField(verbose_name=u"На последнем этаже?")
     balcony = models.BooleanField(default=False, verbose_name=u"Есть балкон?")
-    ap_floor = models.ForeignKey(Floor, on_delete=models.CASCADE, verbose_name=u"Этаж")
+    total_floors = models.PositiveIntegerField(default=5, validators=[MaxValueValidator(100), validate_nonzero], verbose_name=u"Всего этажей")
     h_mtrl = models.ForeignKey(Material, on_delete=models.CASCADE, verbose_name=u"Материал дома")
     h_dstr = models.ForeignKey(District, on_delete=models.CASCADE, verbose_name=u"Район")
     price = models.FloatField(verbose_name=u"Стоимость")
