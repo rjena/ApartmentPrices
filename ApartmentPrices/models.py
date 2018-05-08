@@ -38,6 +38,7 @@ class Apartment(models.Model):
         return '%0.2f' % calculate(self.h_dstr_id, self.h_mtrl_id,
                 self.total_floors, self.first_floor, self.last_floor,
                 self.room_no, self.balcony)
+    _get_price.short_description = u'Стоимость'
     price = property(_get_price)
     def __str__(self):
         return "Квартира "+str(self.id)
