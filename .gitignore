@@ -3,6 +3,7 @@
 __pycache__
 dipebv
 dipenv
+migrations
 db.sqlite3
 /static
 .DS_Store
