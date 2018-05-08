@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator
 from django.core.exceptions import ValidationError
+from .calculator import calculate
 
 def validate_nonzero(value):
     if value == 0:
@@ -33,7 +34,11 @@ class Apartment(models.Model):
     total_floors = models.PositiveIntegerField(default=5, validators=[MaxValueValidator(100), validate_nonzero], verbose_name=u"Всего этажей")
     h_mtrl = models.ForeignKey(Material, on_delete=models.CASCADE, verbose_name=u"Материал дома")
     h_dstr = models.ForeignKey(District, on_delete=models.CASCADE, verbose_name=u"Район")
-    price = models.FloatField(verbose_name=u"Стоимость")
+    def _get_price(self):
+        return '%0.2f' % calculate(self.h_dstr_id, self.h_mtrl_id,
+                self.total_floors, self.first_floor, self.last_floor,
+                self.room_no, self.balcony)
+    price = property(_get_price)
     def __str__(self):
         return "Квартира "+str(self.id)
     class Meta:
