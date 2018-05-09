@@ -7,11 +7,11 @@ import numpy as np
 from .calculator import calculate
 
 class ApartmentViewSet(viewsets.ModelViewSet):
-    queryset = Apartment.objects.all()
+    queryset = Apartment.objects.order_by('-id')
     serializer_class = ApartmentSerializer
 
 def ApartmentPrices_list(request):
-	apartments = Apartment.objects.all().order_by('id')
+	apartments = Apartment.objects.all().order_by('-id')
 	return render(request, 'ApartmentPrices/ApartmentPrices_list.html', {'apartments':apartments})
 
 def detail(request, apartment_id):
