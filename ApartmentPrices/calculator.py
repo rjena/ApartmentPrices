@@ -4,9 +4,9 @@ import numpy as np
 '''     Лен. р-н;Окт. р-н;Прав. р-н;
         кирп.;м/к;пан.;дер.;
         этажность;1й эт.;посл. эт.;
-        комн.;балкон;цена
+        комн.;площадь;балкон;цена
 '''
-r = np.genfromtxt('/home/rjena/ApartmentPrices/data.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, int, float))
+r = np.genfromtxt('/home/rjena/ApartmentPrices/datawarea.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, float, int, int))
 
 dataLen = len(r)    # количество квартир
 varLen = len(r[0])  # количество переменных
@@ -24,7 +24,8 @@ x9 = []
 x10 = []
 x11 = []
 x12 = []
-x = [x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12]
+x13 = []
+x = [x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13]
 for i in range(0,dataLen):
     y.append(r[i][varLen-1])
     for j in range(0,varLen-1):
@@ -64,17 +65,18 @@ def summul(i,j):
 getMatrixes()
 invMatrA = np.linalg.inv(matrA)
 coefs = np.dot(invMatrA,matrB)
+print(coefs)
 
 '''     Лен. р-н;Окт. р-н;Прав. р-н;
         кирп.;м/к;пан.;дер.;
         этажность;1й эт.;посл. эт.;
-        комн.;балкон;цена
+        комн.;площадь;балкон;цена
 '''
-def calculate(d,m,tf,ff,lf,r,b):
-    priceCalc = coefs[0] + r * coefs[11] + tf * coefs[8]
+def calculate(d,m,tf,ff,lf,r,a,b):
+    priceCalc = coefs[0] + r * coefs[11] + float(a) * coefs[12] + tf * coefs[8]
 
     if b:
-        priceCalc += coefs[12]
+        priceCalc += coefs[13]
     if ff:
         priceCalc += coefs[9]
     if lf:
