@@ -10,7 +10,7 @@ names = ['lenin','okt','prav',
          'kirp','mk','pan','der',
          'floors','1st','last',
          'rooms','area','balcony','price']
-r = np.genfromtxt('datawarea.csv', delimiter=';', names=names,
+r = np.genfromtxt('/home/rjena/ApartmentPrices/LR/datawarea.csv', delimiter=';', names=names,
                   dtype=(int, int, int,
                          int, int, int, int,
                          int, int, int,

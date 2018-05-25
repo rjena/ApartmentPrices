@@ -1,7 +1,7 @@
 import numpy as np
 
 # считывание коэффициентов
-coefs = np.loadtxt('LR/coefsLR.txt')
+coefs = np.loadtxt('/home/rjena/ApartmentPrices/LR/coefsLR.txt')
 
 def calculate(d,m,tf,ff,lf,r,a,b):
     priceCalc = coefs[0] + r * coefs[11] + float(a) * coefs[12] + tf * coefs[8]

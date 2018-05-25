@@ -6,7 +6,7 @@ import numpy as np
         этажность;1й эт.;посл. эт.;
         комн.;площадь;балкон;цена
 '''
-r = np.genfromtxt('datawarea.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, float, int, int))
+r = np.genfromtxt('/home/rjena/ApartmentPrices/LR/datawarea.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, float, int, int))
 
 dataLen = len(r)    # количество квартир
 varLen = len(r[0])  # количество переменных
@@ -66,4 +66,4 @@ getMatrixes()
 invMatrA = np.linalg.inv(matrA)
 coefs = np.dot(invMatrA,matrB)
 
-np.savetxt('coefsLR.txt', coefs, fmt='%.15f')
+np.savetxt('/home/rjena/ApartmentPrices/LR/coefsLR.txt', coefs, fmt='%.15f')
