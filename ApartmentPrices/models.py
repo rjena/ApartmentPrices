@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from .calculator import calculate
 from django.utils.translation import gettext_lazy as _
@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 def validate_nonzero(value):
     if value == 0:
         raise ValidationError(
-            ('Это значение не может быть равно 0'),
+            ('Это значение не может быть равно 0 !'),
             params={'value': value},
         )
     
@@ -29,7 +29,7 @@ class District(models.Model):
 
 class Apartment(models.Model):
     room_no = models.PositiveIntegerField(default=2, validators=[MaxValueValidator(20), validate_nonzero], verbose_name=u"Количество комнат")
-    area = models.DecimalField(default=50.00, decimal_places=2, max_digits=5, verbose_name=u"Площадь")
+    area = models.PositiveIntegerField(default=50, validators=[MinValueValidator(10)], verbose_name=u"Площадь")
     first_floor = models.BooleanField(verbose_name=u"На 1-м этаже?")
     last_floor = models.BooleanField(verbose_name=u"На последнем этаже?")
     balcony = models.BooleanField(default=False, verbose_name=u"Есть балкон?")
@@ -45,6 +45,10 @@ class Apartment(models.Model):
     def clean(self):
         if self.area < self.room_no * 10:
             raise ValidationError(_('Площадь должна быть не меньше значения: Количество комнат * 10 !'))
+        if self.total_floors == 2 and not(self.first_floor) and not(self.last_floor):
+            raise ValidationError(_('Всего этажей вы выбрали 2. Отметьте первый или последний этаж !'))
+        if self.total_floors == 1 and (self.first_floor or self.last_floor):
+            raise ValidationError(_('Всего этажей вы выбрали 1. Уберите отметки у первого и последнего этажа !'))
     def __str__(self):
         return "Квартира "+str(self.id)
     class Meta:
