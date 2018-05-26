@@ -1,0 +1,70 @@
+h1, h2, h3, h4 {
+    font-family: 'Yeseva One', cursive;
+}
+h1 a {
+    color: #F4681C;
+}
+
+body {
+	margin: 0px;
+	background: #f2f3ff;
+}
+
+.header {
+	border-bottom: 1px groove white;
+	overflow: hidden;
+    width:100%;
+    position:fixed;
+    top:0;
+    background-color: #dbeaedff;
+    margin: 0;
+    padding: 1px 20px 3px 40px;
+}
+.header h1, .header h1 a, .header h1 a:active {
+    color: #F4681C;
+    font-size: 36pt;
+    text-decoration: none;
+}
+.top-menu, .top-menu:hover {
+    color: #3F51B5;
+    float: right;
+    font-size: 38pt;
+    margin-right: 20px;
+}
+.top-header, .top-header:hover {
+    color: #3F51B5;
+    text-decoration: underline;
+}
+
+.content {
+    font-size: 13pt;
+    font-family: 'PT Serif', serif;
+	margin-top: 120px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.save {
+    float: right;
+}
+
+.post-form {
+    font-size: 13pt;
+	width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.post-form textarea, .post-form input, .post-form select {
+    width: 180px;
+    float: right;
+}
+
+.apartment {
+    margin-bottom: 20px;
+    padding: 0px 0px 20px 0px;
+    border-bottom: 1px groove white;
+}
+
+.post h1 a, .post h1 a:visited {
+    color: #000000;
+}

@@ -1,23 +1,30 @@
-﻿<head>
-    <title>{{ apartment }}</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href='//fonts.googleapis.com/css?family=Helvetica&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-</head>
-<div>
-    <h1><a href="/">Запросы</a></h1>
-</div>
-<ul>
-<h1>{{ apartment }}</h1>
-    <ul>
-        <li>Количество комнат: {{ apartment.room_no }}</li>
-        <li>Площадь: {{ apartment.area }}</li>
-        <li>Район: {{ apartment.h_dstr }}</li>
-        <li>Материал дома: {{ apartment.h_mtrl }}</li>
-        <li>Этажность: {{ apartment.total_floors }}</li>
-        {% if apartment.first_floor %}<li>На 1-м этаже</li>{% endif %}
-        {% if apartment.last_floor %}<li>На последнем этаже</li>{% endif %}
-        {% if apartment.balcony %}<li>Есть балкон</li>{% endif %}
-        <li>Стоимость: {{ apartment.price }}</li>
-    </ul>
-</ul>
+﻿{% load staticfiles %}
+<html>
+    <head>
+        <title>{{ apartment }}</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/ApartmentPrices.css' %}">
+        <link href='//fonts.googleapis.com/css?family=PT+Serif|Yeseva+One&amp;subset=cyrillic-ext' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+        <div class="header">
+            <h1><a href="/" class="top-header">Запросы</a></h1>
+        </div>
+       
+        <div class="content">
+            <h1>{{ apartment }}</h1>
+            <ul>
+                <li>Количество комнат: {{ apartment.room_no }}</li>
+                <li>Площадь: {{ apartment.area }} м<sup><small>2</small></sup></li>
+                <li>Район: {{ apartment.h_dstr }}</li>
+                <li>Материал дома: {{ apartment.h_mtrl }}</li>
+                <li>Всего этажей: {{ apartment.total_floors }}</li>
+                {% if apartment.first_floor %}<li>На 1-м этаже</li>{% endif %}
+                {% if apartment.last_floor %}<li>На последнем этаже</li>{% endif %}
+                {% if apartment.balcony %}<li>Есть балкон</li>{% endif %}
+                <li>Стоимость: {{ apartment.price }}</li><br>
+            </ul>
+        </div>
+    </body>
+</html>

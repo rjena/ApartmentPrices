@@ -49,6 +49,8 @@ class Apartment(models.Model):
             raise ValidationError(_('Всего этажей вы выбрали 2. Отметьте первый или последний этаж !'))
         if self.total_floors == 1 and (self.first_floor or self.last_floor):
             raise ValidationError(_('Всего этажей вы выбрали 1. Уберите отметки у первого и последнего этажа !'))
+        if self.first_floor and self.last_floor:
+            raise ValidationError(_('Вы выбрали и первый, и последний этаж. Отметьте один вариант !'))
     def __str__(self):
         return "Квартира "+str(self.id)
     class Meta:
