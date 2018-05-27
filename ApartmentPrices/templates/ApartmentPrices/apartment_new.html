@@ -12,8 +12,8 @@
             <h1><a href="/" class="top-header">Запросы</a></h1>
         </div>
         <div class="content post-form">
-            <h1>Новый запрос</h1><br>
-            <form method="POST">{% csrf_token %}
+            <h1>Новый запрос</h1>
+            <form class="form" method="POST">{% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="save btn btn-default">Отправить</button>
             </form>

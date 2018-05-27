@@ -1,5 +1,6 @@
 h1, h2, h3, h4 {
     font-family: 'Yeseva One', cursive;
+    padding-bottom: 5px;
 }
 h1 a {
     color: #F4681C;
@@ -13,10 +14,10 @@ body {
 .header {
 	border-bottom: 1px groove white;
 	overflow: hidden;
-    width:100%;
+    width: 100%;
     position:fixed;
     top:0;
-    background-color: #dbeaedff;
+    background-color: #dbe1ed;
     margin: 0;
     padding: 1px 20px 3px 40px;
 }
@@ -46,17 +47,34 @@ body {
 
 .save {
     float: right;
+    font-size: 13pt;
+    color: #F4681C;
+    font-weight: bold;
+}
+.save:hover {
+    background-color: #c2cde8;
+    color: #F4681C; 
+    font-weight: bold;
 }
 
 .post-form {
     font-size: 13pt;
 	width: 400px;
 	margin-left: auto;
-	margin-right: auto;
+    margin-right: auto;
+	padding-bottom: 60px;
 }
 .post-form textarea, .post-form input, .post-form select {
     width: 180px;
     float: right;
+}
+.post-form h1 {
+    color: #F4681C;
+    padding-bottom: 15px;
+    border-bottom: 1px groove white;
+}
+.form {
+    padding-top: 10px;
 }
 
 .apartment {

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+﻿{% load staticfiles %}
 <html>
     <head>
         <title>Запросы</title>
@@ -20,8 +20,8 @@
                 {% for apartment in apartments %}
                     <div class="apartment">
                         <h1><a href="{% url 'ApartmentPrices:detail' apartment.id %}">{{ apartment }}</a></h1>
-                        Район: {{ apartment.h_dstr }};<br>
-                        Количество комнат: {{ apartment.room_no }}<br>
+                        <p>Район: {{ apartment.h_dstr }}<br>
+                        Количество комнат: {{ apartment.room_no }}</p>
                         Стоимость: {{ apartment.price }}
                     </div>
                 {% endfor %}
