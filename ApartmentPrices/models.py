@@ -3,37 +3,30 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from .calculator import calculate
 from django.utils.translation import gettext_lazy as _
-
-def validate_nonzero(value):
-    if value == 0:
-        raise ValidationError(
-            ('Это значение не может быть равно 0 !'),
-            params={'value': value},
-        )
     
 class Material(models.Model):
-    name_mtrl = models.CharField(max_length=20)
+    name_mtrl = models.CharField(max_length=20, unique=True, verbose_name=u"Название")
     def __str__(self):
         return self.name_mtrl
     class Meta:
         verbose_name = u'Материал дома'
-        verbose_name_plural = u'Материал дома'
+        verbose_name_plural = u'Материалы дома'
 
 class District(models.Model):
-    name_dstr = models.CharField(max_length=20)
+    name_dstr = models.CharField(max_length=20, unique=True, verbose_name=u"Название")
     def __str__(self):
         return self.name_dstr
     class Meta:
         verbose_name = u'Район'
-        verbose_name_plural = u'Район'
+        verbose_name_plural = u'Районы'
 
 class Apartment(models.Model):
-    room_no = models.PositiveIntegerField(default=2, validators=[MaxValueValidator(20), validate_nonzero], verbose_name=u"Количество комнат")
-    area = models.PositiveIntegerField(default=50, validators=[MinValueValidator(10)], verbose_name=u"Площадь")
+    room_no = models.PositiveIntegerField(default=2, validators=[MinValueValidator(1), MaxValueValidator(100)], verbose_name=u"Количество комнат")
+    area = models.PositiveIntegerField(default=50, validators=[MinValueValidator(10), MaxValueValidator(1000)], verbose_name=u"Площадь")
     first_floor = models.BooleanField(verbose_name=u"На 1-м этаже?")
     last_floor = models.BooleanField(verbose_name=u"На последнем этаже?")
     balcony = models.BooleanField(default=False, verbose_name=u"Есть балкон?")
-    total_floors = models.PositiveIntegerField(default=5, validators=[MaxValueValidator(100), validate_nonzero], verbose_name=u"Всего этажей")
+    total_floors = models.PositiveIntegerField(default=5, validators=[MinValueValidator(1), MaxValueValidator(100)], verbose_name=u"Всего этажей")
     h_mtrl = models.ForeignKey(Material, on_delete=models.CASCADE, verbose_name=u"Материал дома")
     h_dstr = models.ForeignKey(District, on_delete=models.CASCADE, verbose_name=u"Район")
     def _get_price(self):
@@ -55,4 +48,4 @@ class Apartment(models.Model):
         return "Квартира "+str(self.id)
     class Meta:
         verbose_name = u'Квартира'
-        verbose_name_plural = u'Квартира'
+        verbose_name_plural = u'Квартиры'

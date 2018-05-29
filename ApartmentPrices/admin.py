@@ -11,7 +11,7 @@ class ApartmentAdmin(admin.ModelAdmin):
     	}),
     ]
     list_display = ('id', 'h_dstr', 'h_mtrl', 'total_floors', 'first_floor', 'last_floor', 'room_no', 'area', 'balcony', 'price')
-    list_filter = ['h_dstr', 'room_no']
+    list_filter = ['h_dstr', 'h_mtrl']
 
 admin.site.register(Apartment, ApartmentAdmin)
 admin.site.register(Material)
