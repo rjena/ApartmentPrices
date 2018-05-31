@@ -48,7 +48,7 @@ def apartment_new(request):
     	if form.is_valid():
             apartment = form.save(commit=False)
             apartment.save()
-            return redirect('/')
+            return redirect('/'+str(Apartment.objects.latest('id').id))
     else:
     	form = ApartmentForm()
     return render(request, 'ApartmentPrices/apartment_new.html', {'form': form})
