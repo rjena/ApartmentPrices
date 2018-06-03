@@ -63,7 +63,19 @@ def summul(i,j):
         return np.sum(a * b)
 
 getMatrixes()
-invMatrA = np.linalg.inv(matrA)
+invMatrA = np.linalg.pinv(matrA)
 coefs = np.dot(invMatrA,matrB)
+
+predY = np.dot(np.concatenate((np.ones((1,dataLen)),np.array(x))).T,coefs)
+sse = 0
+sst = 0
+ym = np.mean(y)
+for i in range(dataLen):
+    sse += pow(predY[i] - y[i], 2)
+    sst += pow(y[i] - ym, 2)
+r2 = 1 - sse/sst
+r2adj = 1 - (1 - r2) * (dataLen - 1) / (dataLen - varLen - 1)
+print('R2 = '+'%0.2f' %r2)
+print('R2adj = '+'%0.2f' %r2adj)
 
 np.savetxt('/home/rjena/ApartmentPrices/LR/coefsLR.txt', coefs, fmt='%.15f')
