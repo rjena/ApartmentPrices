@@ -10,8 +10,8 @@ from .forms import ApartmentForm
 @api_view(['GET', 'POST'])
 def apartment_api(request):
     if request.method == 'GET':
-        apartment = Apartment.objects.latest('id')
-        serializer = ApartmentSerializer(apartment)
+        apartment = Apartment.objects.all().order_by('-id')
+        serializer = ApartmentSerializer(apartment, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = ApartmentSerializer(data=request.data)
@@ -23,7 +23,7 @@ def apartment_api(request):
 @api_view(['GET'])
 def district_api(request):
     if request.method == 'GET':
-        district = District.objects.order_by()
+        district = District.objects.all()
         d_serializer = DistrictSerializer(district, many=True)
         return Response(d_serializer.data)
 
@@ -48,7 +48,7 @@ def apartment_new(request):
     	if form.is_valid():
             apartment = form.save(commit=False)
             apartment.save()
-            return redirect('/'+str(Apartment.objects.latest('id').id))
+            return redirect('/'+str(apartment.id))
     else:
     	form = ApartmentForm()
     return render(request, 'ApartmentPrices/apartment_new.html', {'form': form})

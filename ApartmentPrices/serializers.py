@@ -4,7 +4,7 @@ from .models import Apartment, District, Material
 class ApartmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
-        fields = ('room_no', 'area', 'h_dstr', 'h_mtrl', 'balcony',
+        fields = ('id', 'room_no', 'area', 'h_dstr', 'h_mtrl', 'balcony',
             'total_floors', 'first_floor', 'last_floor', 'price')
     def validate(self, data):
         if data['area'] < data['room_no'] * 10:
