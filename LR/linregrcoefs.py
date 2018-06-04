@@ -1,11 +1,6 @@
 import numpy as np
 
 # считывание данных
-'''     Лен. р-н;Окт. р-н;Прав. р-н;
-        кирп.;м/к;пан.;дер.;
-        этажность;1й эт.;посл. эт.;
-        комн.;площадь;балкон;цена
-'''
 r = np.genfromtxt('/home/rjena/ApartmentPrices/LR/datawarea.csv', delimiter=';', dtype=(int, int, int, int, int, int, int, int, int, int, int, float, int, int))
 
 varLen = len(r[0])  # количество переменных

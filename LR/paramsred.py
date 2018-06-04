@@ -1,11 +1,6 @@
 import numpy as np
 from sklearn.ensemble import ExtraTreesClassifier
-# считывание данных
-'''		Лен. р-н;Окт. р-н;Прав. р-н;
-		кирп.;м/к;пан.;дер.;
-		этажность;1й эт.;посл. эт.;
-		комн.;балкон;цена
-'''
+
 names = ['lenin','okt','prav',
          'kirp','mk','pan','der',
          'floors','1st','last',
